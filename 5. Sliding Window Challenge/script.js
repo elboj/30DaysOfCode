@@ -95,3 +95,77 @@ function findMaxAverage(nums, k) {
 }
 
 findMaxAverage([1, 12, -5, -6, 50, 3], 4);
+
+//PROBLEM 4
+
+/***
+ * 
+ * 1876. Substrings of Size Three with Distinct Characters
+Easy
+
+396
+
+15
+
+Add to List
+
+Share
+A string is good if there are no repeated characters.
+
+Given a string s​​​​​, return the number of good substrings of length three in s​​​​​​.
+
+Note that if there are multiple occurrences of the same substring, every occurrence should be counted.
+
+A substring is a contiguous sequence of characters in a string.
+
+ 
+
+Example 1:
+
+Input: s = "xyzzaz"
+Output: 1
+Explanation: There are 4 substrings of size 3: "xyz", "yzz", "zza", and "zaz". 
+The only good substring of length 3 is "xyz".
+Example 2:
+
+Input: s = "aababcabc"
+Output: 4
+Explanation: There are 7 substrings of size 3: "aab", "aba", "bab", "abc", "bca", "cab", and "abc".
+The good substrings are "abc", "bca", "cab", and "abc".
+ 
+
+Constraints:
+
+1 <= s.length <= 100
+s​​​​​​ consists of lowercase English letters.
+ */
+
+const goodStr = function (str, k) {
+  const arr = str.split("");
+  let init = [];
+  let curr = "";
+  let count = 0;
+
+  for (let i = 0; i < k; i++) {
+    init.push(arr[i]);
+  }
+
+  let initSet = new Set(init);
+  initSet.size === 3 && count++;
+
+  //Implementing the window using slice
+  for (let i = k; i < arr.length; i++) {
+    curr = arr.slice(i - 2, i + 1);
+    let currSet = new Set(curr);
+    currSet.size === 3 && count++;
+  }
+
+  console.log(count);
+};
+
+// goodStr("xyzzaz", 3);
+goodStr("aababcabc", 3);
+// aababcabc;
+
+// const ttt = new Set([1, 2, 1, 1, 1, 2, 1]);
+// console.log(ttt.size);
